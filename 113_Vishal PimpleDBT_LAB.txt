@@ -1,0 +1,135 @@
+                               DBT  LAB EXAM
+		                    NAME : VISHAL PIMPLE
+		                   ROLLNO : 113 JUHU
+		  
+		  
+		  
+    Section 1
+		  
+      Q11.	Create table DEPT with the following structure:-
+	  
+	  create database lab;
+
+        CREATE TABLE DEPT
+		(
+         DEPTNO int,
+         DNAME varchar(15),
+         LOC varchar(10)
+         );
+
+       INSERT INTO DEPT VALUES(10,'ACCOUNTING','NEW YORK');
+       INSERT INTO DEPT VALUES(20,'REASERCH','DALLAS'),
+        (20,'SALES','CHIACAGO'),
+        (40,'OPERATION','BOSTON');
+
+
+        2.	Create table EMP with the following structure:-
+		  
+		  
+		  
+		  CREATE TABLE EMP
+         (
+           EMPNO INT(4),
+           ENAME varchar(10),
+           JOB varchar(9),
+           HIREDATE date,
+           SAL float(7,2),
+           COM float(7,2),
+           DEPTO int(2)
+           );
+          DESC EMP;
+		  
+		  
+           INSERT INTO EMP VALUES(7839,'KING','MANAGER','1991-11-17',5000 ,NULL,10);
+        INSERT INTO EMP VALUES('7698','BLAKE','CLERK','1981-05-01',2850,NULL,30),
+        (7782,'CLARK','MANAGER','1981-06-09',2450,NULL,10),
+        (7566,'JONES','CLERK','1981-04-02',2975,NULL,20);
+        INSERT INTO EMP VALUES(7654,'MARTIN','SALESMAN','1981-09-28',1250,1400,30),
+        (7499,'ALLEN','SALESMAN','1981-02-20',1600,300,30);
+		
+		
+		Write SELECT statements to achieve the following:-
+       3.Display all the employees where SAL between 2500 and 5000 (inclusive of both).
+	   
+	--->  SELECT * FROM EMP
+          WHERE SAL >=2500 AND SAL<= 5000;
+		  
+		  
+		4.	Display all the ENAMEs in descending order of ENAME.
+   
+      ----> SELECT ENAME FROM EMP
+            ORDER BY ENAME DESC;   
+			
+		5.	Display all the JOBs in lowercase
+
+    ---->SELECT LOWER(JOB) FROM EMP;
+	
+	6.	Display the ENAMEs and the lengths of the ENAMEs.
+	
+	
+	--->SELECT ENAME,LENGTH(ENAME) FROM EMP;
+	
+	
+    7.	Display the DEPTNO and the count of employees who belong to that DEPTNO .
+  
+  
+    --->SELECT
+	
+	8.	Display the DNAMEs and the ENAMEs who belong to that DNAME.
+	
+	---> SELECT DNAME ,ENAME FROM FROM EMP,DEPT
+	  WHERE EMP.DEPTNO=DEPT.DEPTNO;
+	9.	Display the position at which the string ‘AR’ occurs in the ename
+	
+	---> SELECT POSITION ('AR' IN ENAME);
+	
+	10.	Display the HRA for each employee given that HRA is 20% of SAL.
+	
+	--> SELECT ENAME,SAL*0.2 AS 'HRA' FROM EMP;
+	
+	
+	
+	
+	
+	
+	
+	SECTION 2:
+	
+	
+	
+	
+	QUSTION 1. WRITE PROCEDURE TO FIND DAC IN CDAC
+	
+	   DROP TABLE TEMP;
+          CREATE TABLE TEMP(
+          STRING1 VARCHAR(20),
+          STRING2 VARCHAR(20),
+          RES VARCHAR(25));
+          
+                   DELIMITER //
+          CREATE PROCEDURE PROC1(S1 VARCHAR(20),S2 VARCHAR(20))
+          BEGIN
+             IF SUBSTR(S1,2)=S2 THEN
+               INSERT INTO TEMP VALUES(S1,S2,'FOUND');
+               ELSE
+               INSERT INTO TEMP VALUES(S1,S2,'NOT FOUND');
+               END IF;
+               END; //
+			DELIMITER //
+            CALL PROC1('CDAC','DAC');
+            SELECT * FROM TEMP;
+	
+	QUESTION 2. WRITE FUNCTION /......
+	
+	  DELIMITER //
+CREATE FUNCTION FUNC1 (NUM1 INT,NUM2 INT, NUM3 INT)
+RETURNS BOOLEAN
+deterministic
+BEGIN
+	IF (NUM1+NUM2)>NUM3 OR (NUM3+NUM2)>NUM1 OR (NUM1+NUM3)>NUM2 THEN
+      RETURN TRUE;
+      else 
+          RETURN FALSE;
+          END IF;
+          END; //
+          DELIMITER ;
